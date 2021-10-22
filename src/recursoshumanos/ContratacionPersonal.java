@@ -11,7 +11,7 @@ package recursoshumanos;
  */
 public class ContratacionPersonal {
     
-    
+    int s = 0;
     
     
     
