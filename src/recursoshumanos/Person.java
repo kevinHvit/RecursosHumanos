@@ -122,7 +122,7 @@ public class Person {
     }
     @Override
    public String toString() {
-    return "\nCédula: "+this.getIde()+ "\nNombre: "+this.getName()+ "\nApellido: " + this.getLastName();
+    return "\nCédula: "+this.getIde()+ "\nNombre: "+this.getName()+ "\nApellido: " + this.getLastName() + "\nCelular: " + this.getCelphone();
    }
 
     

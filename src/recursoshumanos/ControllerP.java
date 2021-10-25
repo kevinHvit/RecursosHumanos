@@ -49,31 +49,24 @@ public class ControllerP {
         return nuevo;
     }
     
-        public void addPerson() throws IOException{
+    public void addPerson() throws IOException{
         
         for(int i=0;i<this.persons.length;i++){
         
             this.persons[i]= createPerson();
         
         }    
-    }
-        
-    public void deletePerson(String ide){
-        int pos = searchPerson(ide);
-        
-        if(pos!=-1){
-            
-            this.persons[pos].remove(ide);
-            
-        
-        
-        
-        }
-    
-    
     }    
         
-        
+    public void viewPuesto(String workStation){
+    
+        for(int i=0;i<this.persons.length;i++){
+            if(this.persons[i].getWorkStation().equals(workStation)){
+                this.persons[i].toString();
+            
+            }
+        }
+    }    
     public void viewAllPerson(){
     
         for(int i=0 ;i<this.persons.length;i++){
@@ -109,12 +102,19 @@ public class ControllerP {
 
     }
     
-    public void remove(String ide){
+    public void deletePerson(String ide){
     int j = searchPerson(ide);
         for(int i=j;i<this.persons.length-1;i++){
             this.persons[i] = this.persons[i+1];
             
         }
+    
+    }
+    
+    public void modifyPerson(){
+    
+    
+    
     
     }
     
