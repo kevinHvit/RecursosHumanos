@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Kevin Castrillo
  */
 public class Employee extends Person{
-    
+    private Pay pay;
     private double salary;
     private String startJob;
     private String workStation;
@@ -83,6 +83,6 @@ public class Employee extends Person{
     public String toString() {
         return super.toString() + "\nPuesto: " + this.workStation;
     }
-
+    
     
 }

@@ -16,8 +16,9 @@ import java.io.InputStreamReader;
  */
 public class ControllerP {
     
-    Employee persons [] = new Employee [20];
-   
+    private Employee persons [] = new Employee [20];
+    private int tam=0;
+    private Pay pays;
    
 
     public Employee createPerson()throws IOException {
@@ -51,11 +52,8 @@ public class ControllerP {
     
     public void addPerson() throws IOException{
         
-        for(int i=0;i<this.persons.length;i++){
-        
-            this.persons[i]= createPerson();
-        
-        }    
+        this.persons[this.tam]= createPerson();
+        this.tam++;
     }    
         
     public void viewPuesto(String workStation){
@@ -108,15 +106,110 @@ public class ControllerP {
             this.persons[i] = this.persons[i+1];
             
         }
-    
+        ;
     }
     
-    public void modifyPerson(){
+    public void modifyPerson(String ide, String opc)throws IOException{
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int pos = searchPerson(ide);
+        
+        switch(opc){
+        
+            case "1"://name
+                System.out.println("Digite el nuevo Nombre: ");
+                String rename = br.readLine();
+                this.persons[pos].setName(rename);
+                System.out.println("\nEl nombre se cambio correctamente...");
+                this.persons[pos].toString();
+                break;
+        
+            case "2"://lastName
+                System.out.println("Digite el nuevo Apellido: ");
+                String reLastName = br.readLine();
+                this.persons[pos].setLastName(reLastName);
+                System.out.println("\nEl Apellido se cambio correctamente...");
+                this.persons[pos].toString();
+                break;
+            
+            case "3"://celphone
+                
+                System.out.println("Digite el nuevo numero: ");
+                String recelphone = br.readLine();
+                this.persons[pos].setCelphone(recelphone);
+                System.out.println("\nEl numero se cambio correctamente...");
+                this.persons[pos].toString();
+                break;    
+            case "4"://WorkStation
+                
+                System.out.println("Digite el nuevo Puesto: ");
+                String reworkStation = br.readLine();
+                this.persons[pos].setCelphone(reworkStation);
+                System.out.println("\nEl puesto se cambio correctamente...");
+                this.persons[pos].toString();
+                break;
+            
+            default :
+                System.out.println("Opcion Incorrecta");
+                
+                break;
+                
+        }
+    }
+    
+    public void payH(String ide)throws IOException{
+      
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int pos = searchPerson(ide);
+        double res=0;
+        double price;
+        int horaT;
+        if(pos!= -1){
+            
+            System.out.println("Digite las horas trabajadas");
+            horaT = Integer.parseInt(br.readLine());
+            System.out.println("Digite el precio por hora para el puesto asignado");
+            price = Double.parseDouble(br.readLine());
+            
+            res = payHour(horaT,price);
+            this.pays.setHours(res);
+        }
+          
+      }
+    
+    public double payHour(int horaT, double price){
+    double result=0;
+    
+    return result = horaT*price; 
+    }
+    
+    public void payExtras(String ide)throws IOException{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int pos = searchPerson(ide);
+        double res=0;
+        double price;
+        int horaT;
+        if(pos!= -1){
+            
+            System.out.println("Digite las horas extras trabajadas en 2 semanas");
+            horaT = Integer.parseInt(br.readLine());
+            System.out.println("Digite el precio por hora extra para el puesto asignado");
+            price = Double.parseDouble(br.readLine());
+            
+            res = payHourExtra(horaT,price);
+            this.pays.setExtraHours(res);
     
     
-    
+        }
     
     }
+    public double payHourExtra(int horaT, double price){
+    double result=0;
+    
+    return result = horaT*price; 
+    }
+    
+    
     
     
 }
