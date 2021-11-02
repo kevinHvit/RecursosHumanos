@@ -27,9 +27,7 @@ public class HiringPerson {
         String ide;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.println("<----------------------------------------------->");  
-        System.out.println("\tBienvenido al menu principal");    
-        System.out.println("<----------------------------------------------->");
+        System.out.println(" ");
         
         while(this.exit){
             

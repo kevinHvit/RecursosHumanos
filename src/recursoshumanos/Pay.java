@@ -11,24 +11,60 @@ package recursoshumanos;
  */
 public class Pay {
     
+    private double brutSalary;
+    private double netSalary;
     private double hours;
     private double extraHours;
     private double vale;
+    private String ide;
 
     public Pay() {
         
+        double brutSalary=0.0;
+        double netSalary = 0.0;
         this.hours = 0.0;
         this.extraHours = 0.0;
         this.vale = 0.0;
-        
+        this.ide = " ";
     }
 
-    public Pay(double hours, double extraHours, double vale) {
+    public Pay(String ide,double brutSalary, double netSalary,double hours, double extraHours, double vale) {
+        
+        this.ide = ide;
+        this.brutSalary = brutSalary;
+        this.netSalary =netSalary;
         this.hours = hours;
         this.extraHours = extraHours;
         this.vale = vale;
     }
+    public String getIde(){
 
+        return ide;
+    }
+    public void setIde(String ide){
+
+
+        this.ide = ide;
+    }
+    
+    public double getNetSalary(){
+
+        return netSalary;
+    }
+    public void setNetSalary(double netSalary){
+
+
+        this.netSalary = netSalary;
+    }
+    public double getBrutSalary(){
+
+        return brutSalary;
+    }
+    public void setBrutSalary(double brutSalary){
+
+
+        this.brutSalary = brutSalary;
+    }
     /**
      * @return the hours
      */
@@ -71,7 +107,11 @@ public class Pay {
         this.vale = vale;
     }
     
-    
+     @Override
+    public String toString() {
+    return "\nSalario Bruto: "+this.getBrutSalary()+"\nSalario Neto: "+ this.getNetSalary()+"\nHoras Trabajadas: " + this.getHours()+ "\nHoras extras: " + this.getExtraHours() + "\nVale: "+ this.getVale();
+   }
+
     
     
     

@@ -18,7 +18,8 @@ public class ControllerP {
     
     private Employee persons [] = new Employee [20];
     private int tam=0;
-    private Pay pays;
+    private int tamP=0;
+    private Pay pays [] = new Pay [20];
    
 
     public Employee createPerson()throws IOException {
@@ -55,7 +56,10 @@ public class ControllerP {
         this.persons[this.tam]= createPerson();
         this.tam++;
     }    
-        
+    
+
+
+    
     public void viewPuesto(String workStation){
     
         for(int i=0;i<this.persons.length;i++){
@@ -87,6 +91,31 @@ public class ControllerP {
         return -1;
 
     }
+    public int searchP(String ide) {
+
+        for (int i = 0; i < this.pays.length; i++) {
+            
+            if (this.pays[i].getIde().equals(ide)) {
+
+                return i;
+            }
+        }
+
+        return -1;
+
+    }
+    public void viewP(String ide){
+        int pos = searchP(ide);
+        for(int i=0;i<this.pays.length;i++){
+            if(pos!=-1){
+                this.pays[pos].toString();
+            
+            }else{
+                System.out.println("No existe");
+            }
+        }
+    }
+    
     public void viewPerson(String ide){
     int pos = searchPerson(ide);
     
@@ -157,13 +186,45 @@ public class ControllerP {
         }
     }
     
-    public void payH(String ide)throws IOException{
-      
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int pos = searchPerson(ide);
+    
+    public double payHour(int horaT, double price){
+    
+    return horaT*price; 
+    }
+    
+    
+    public double payHourExtra(int horaT, double price){
+    
+    
+    return  horaT*price; 
+    }
+
+    public double payVale(double vale, int interesVale ){
         double res=0;
+        
+        res = vale/10000;
+        
+
+        return vale+(res * interesVale);
+    }
+    
+    
+    public void pay(String ide)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int pos = searchPerson(ide);
+        int horaT=0;
         double price;
-        int horaT;
+        
+        double settHour=0;
+        double settVale=0;
+        double settExtra=0;
+        double brutSalary=0;
+        double netSalary=0;
+        double vale=0;
+        double ccss = 0.12;
+        double sure=0;
+        
         if(pos!= -1){
             
             System.out.println("Digite las horas trabajadas");
@@ -171,44 +232,71 @@ public class ControllerP {
             System.out.println("Digite el precio por hora para el puesto asignado");
             price = Double.parseDouble(br.readLine());
             
-            res = payHour(horaT,price);
-            this.pays.setHours(res);
+            settHour = payHour(horaT,price);
+            
+            System.out.println(this.persons[pos].getName()+" "+this.persons[pos].getLastName()+ " Registro otras Horas Extras? N/S ");
+            String  decision = br.readLine();
+
+            if(decision.equals("S")){
+                System.out.println("Digite las horas extras trabajadas en 2 semanas");
+                horaT = Integer.parseInt(br.readLine());
+                System.out.println("Digite el precio por hora extra para el puesto asignado");
+                price = Double.parseDouble(br.readLine());
+                
+                settExtra = payHourExtra(horaT,price);
+            } else{
+                System.out.println("No se registro horas extras");
+                settExtra=0;
+            }
+
+            System.out.println(this.persons[pos].getName()+" "+this.persons[pos].getLastName()+ " Solicito Vale? N/S ");
+            decision = br.readLine();  
+            
+            if(decision.equals("S")){
+                System.out.println("Digite el monto del vale");
+                vale = Double.parseDouble(br.readLine());
+                System.out.println("Digite el interes del vale por cada 10 mil colones");
+                int interesVale = Integer.parseInt(br.readLine());
+                
+                settVale = payVale(vale,interesVale);
+                
+                System.out.println("El vale es de: "+ payVale(vale,interesVale));
+            } else{
+                System.out.println("No se registro vale");
+                settVale =0;
+            }
+            
+            brutSalary = settHour + settExtra + vale ;
+            sure = (brutSalary * ccss);
+            netSalary = brutSalary - settVale - sure;
+            Pay newPay = new Pay(ide,brutSalary,netSalary,settHour,settExtra,settVale);
+            this.pays[tamP] = newPay;
+            this.tamP++;
         }
-          
-      }
-    
-    public double payHour(int horaT, double price){
-    double result=0;
-    
-    return result = horaT*price; 
+        
+
     }
-    
-    public void payExtras(String ide)throws IOException{
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public void viewPayPerson(String ide){
         int pos = searchPerson(ide);
-        double res=0;
-        double price;
-        int horaT;
-        if(pos!= -1){
-            
-            System.out.println("Digite las horas extras trabajadas en 2 semanas");
-            horaT = Integer.parseInt(br.readLine());
-            System.out.println("Digite el precio por hora extra para el puesto asignado");
-            price = Double.parseDouble(br.readLine());
-            
-            res = payHourExtra(horaT,price);
-            this.pays.setExtraHours(res);
-    
-    
+        int posP = searchP(ide);
+        if((pos!= -1)&&(posP!= -1)){
+            System.out.println(this.persons[pos].toString() + "\n" + this.pays[posP].toString()); 
+        }else{
+            System.out.println("No se encontro alguna persona con ese numero de cedula.");
         }
-    
-    }
-    public double payHourExtra(int horaT, double price){
-    double result=0;
-    
-    return result = horaT*price; 
     }
     
+    public void viewAllPay(){
+
+        for(int i =0;i<this.persons.length;i++){
+            for(int j=0;j<this.pays.length;j++){
+                if(this.persons[i].getIde().equals(this.pays[j].getIde())){
+                    System.out.println(this.persons[i].toString() + "\n" + this.pays[j].toString()); 
+                }
+            }
+        }
+    }
+
     
     
     
