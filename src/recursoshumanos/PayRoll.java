@@ -15,15 +15,17 @@ import java.io.InputStreamReader;
  */
 public class PayRoll {
     
-    private ControllerP p1;
-    private boolean exit = false;
+    
+   
 
     public void menu() throws IOException{
         String opcc;
         String ide;
+        boolean exit = false;
+        ControllerP p1 = new ControllerP();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        while(this.exit){
+        while(!exit){
             
             System.out.println("1. Pagar a una persona");  
             System.out.println("2. Ver pago de una persona");  
@@ -62,7 +64,7 @@ public class PayRoll {
                 case "4":
                     
                     System.out.println("Saliendo del Programa");
-                    this.exit = true;
+                    exit = true;
                     break;
                 default :
                     System.out.println("Opcion Incorrecta");

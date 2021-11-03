@@ -23,8 +23,8 @@ public class Principal {
         // TODO code application logic here
         
         boolean select = false;
-        HiringPerson p1 = null ;
-        PayRoll p2 = null;
+        HiringPerson p1 = new HiringPerson() ;
+        PayRoll p2 = new PayRoll();
         
         
         

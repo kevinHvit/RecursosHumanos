@@ -58,31 +58,31 @@ public class ControllerP {
     }    
     
 
-
-    
     public void viewPuesto(String workStation){
     
-        for(int i=0;i<this.persons.length;i++){
+        for(int i=0;i<this.tam;i++){
             if(this.persons[i].getWorkStation().equals(workStation)){
-                this.persons[i].toString();
+                System.out.println(this.persons[i].toString());
             
             }
         }
-    }    
+    }
+    
+       
     public void viewAllPerson(){
     
-        for(int i=0 ;i<this.persons.length;i++){
+        for(int i=0 ;i<this.tam;i++){
             System.out.println(this.persons[i].toString());
         
         }
-    
+        
     }
     
-    public int searchPerson(String ced) {
+    public int searchPerson(String ide) {
 
-        for (int i = 0; i < this.persons.length; i++) {
+        for (int i = 0; i < this.tam; i++) {
             
-            if (this.persons[i].getIde().equals(ced)) {
+            if (this.persons[i].getIde().equals(ide)) {
 
                 return i;
             }
@@ -93,7 +93,7 @@ public class ControllerP {
     }
     public int searchP(String ide) {
 
-        for (int i = 0; i < this.pays.length; i++) {
+        for (int i = 0; i < this.tamP; i++) {
             
             if (this.pays[i].getIde().equals(ide)) {
 
@@ -106,7 +106,7 @@ public class ControllerP {
     }
     public void viewP(String ide){
         int pos = searchP(ide);
-        for(int i=0;i<this.pays.length;i++){
+        for(int i=0;i<this.tamP;i++){
             if(pos!=-1){
                 this.pays[pos].toString();
             
@@ -119,8 +119,8 @@ public class ControllerP {
     public void viewPerson(String ide){
     int pos = searchPerson(ide);
     
-        if(pos!= 1){
-            this.persons[pos].toString();
+        if(pos!= -1){
+            System.out.println(this.persons[pos].toString());
 
         }else{
             System.out.println("No se encontro alguna persona con ese numero de cedula.");
@@ -131,11 +131,11 @@ public class ControllerP {
     
     public void deletePerson(String ide){
     int j = searchPerson(ide);
-        for(int i=j;i<this.persons.length-1;i++){
+        for(int i=j;i<this.tam-1;i++){
             this.persons[i] = this.persons[i+1];
             
         }
-        ;
+        System.out.println("La persona se ha elimanado Correctamente");
     }
     
     public void modifyPerson(String ide, String opc)throws IOException{
@@ -211,8 +211,9 @@ public class ControllerP {
     
     public void pay(String ide)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        System.out.println("aqui");
         int pos = searchPerson(ide);
+        System.out.println("aqui");
         int horaT=0;
         double price;
         
@@ -225,7 +226,7 @@ public class ControllerP {
         double ccss = 0.12;
         double sure=0;
         
-        if(pos!= -1){
+        if(pos!=-1){
             
             System.out.println("Digite las horas trabajadas");
             horaT = Integer.parseInt(br.readLine());
