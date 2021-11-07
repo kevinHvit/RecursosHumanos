@@ -79,19 +79,19 @@ public class ControllerP {
     }
     
     public int searchPerson(String ide) {
-
+        
         for (int i = 0; i < this.tam; i++) {
             
             if (this.persons[i].getIde().equals(ide)) {
-
+                
                 return i;
             }
         }
-
+        
         return -1;
 
     }
-    public int searchP(String ide) {
+    public int searchPay(String ide) {
 
         for (int i = 0; i < this.tamP; i++) {
             
@@ -105,7 +105,7 @@ public class ControllerP {
 
     }
     public void viewP(String ide){
-        int pos = searchP(ide);
+        int pos = searchPay(ide);
         for(int i=0;i<this.tamP;i++){
             if(pos!=-1){
                 this.pays[pos].toString();
@@ -135,6 +135,7 @@ public class ControllerP {
             this.persons[i] = this.persons[i+1];
             
         }
+        this.tam--;
         System.out.println("La persona se ha elimanado Correctamente");
     }
     
@@ -199,26 +200,28 @@ public class ControllerP {
     return  horaT*price; 
     }
 
-    public double payVale(double vale, int interesVale ){
-        double res=0;
-        
-        res = vale/10000;
-        
-
-        return vale+(res * interesVale);
-    }
+//    public double payVale(double vale, int interesVale ){
+//        double res=0;
+//        
+//        res = vale/10000;
+//        
+//
+//        return vale+(res * interesVale);
+//    }
     
     
     public void pay(String ide)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("aqui");
+        
         int pos = searchPerson(ide);
-        System.out.println("aqui");
+        
+        
         int horaT=0;
+        int horaE=0;
         double price;
         
         double settHour=0;
-        double settVale=0;
+        //double settVale=0;
         double settExtra=0;
         double brutSalary=0;
         double netSalary=0;
@@ -228,7 +231,7 @@ public class ControllerP {
         
         if(pos!=-1){
             
-            System.out.println("Digite las horas trabajadas");
+            System.out.println("Digite las horas trabajadas en esta Quincena");
             horaT = Integer.parseInt(br.readLine());
             System.out.println("Digite el precio por hora para el puesto asignado");
             price = Double.parseDouble(br.readLine());
@@ -236,69 +239,69 @@ public class ControllerP {
             settHour = payHour(horaT,price);
             
             System.out.println(this.persons[pos].getName()+" "+this.persons[pos].getLastName()+ " Registro otras Horas Extras? N/S ");
-            String  decision = br.readLine();
+            String  decision = br.readLine().toUpperCase();
 
             if(decision.equals("S")){
                 System.out.println("Digite las horas extras trabajadas en 2 semanas");
-                horaT = Integer.parseInt(br.readLine());
-                System.out.println("Digite el precio por hora extra para el puesto asignado");
-                price = Double.parseDouble(br.readLine());
+                horaE = Integer.parseInt(br.readLine());
+                price *=2; 
+                System.out.println("El precio de la hora Extra es: "+ price);
                 
-                settExtra = payHourExtra(horaT,price);
+                settExtra = payHourExtra(horaE,price);
+                
             } else{
                 System.out.println("No se registro horas extras");
                 settExtra=0;
             }
 
             System.out.println(this.persons[pos].getName()+" "+this.persons[pos].getLastName()+ " Solicito Vale? N/S ");
-            decision = br.readLine();  
+            decision = br.readLine().toUpperCase();  
             
             if(decision.equals("S")){
                 System.out.println("Digite el monto del vale");
                 vale = Double.parseDouble(br.readLine());
-                System.out.println("Digite el interes del vale por cada 10 mil colones");
-                int interesVale = Integer.parseInt(br.readLine());
+//                System.out.println("Digite el interes del vale por cada 10 mil colones");
+//                int interesVale = Integer.parseInt(br.readLine());
                 
-                settVale = payVale(vale,interesVale);
+                //settVale = payVale(vale,interesVale);
                 
-                System.out.println("El vale es de: "+ payVale(vale,interesVale));
+                
             } else{
                 System.out.println("No se registro vale");
-                settVale =0;
             }
             
             brutSalary = settHour + settExtra + vale ;
             sure = (brutSalary * ccss);
-            netSalary = brutSalary - settVale - sure;
-            Pay newPay = new Pay(ide,brutSalary,netSalary,settHour,settExtra,settVale);
+            netSalary = brutSalary - vale - sure;
+            
+            Pay newPay = new Pay(ide,brutSalary,netSalary,horaT,horaE,vale);
+            
             this.pays[tamP] = newPay;
             this.tamP++;
         }
         
 
     }
+ 
     public void viewPayPerson(String ide){
-        int pos = searchPerson(ide);
-        int posP = searchP(ide);
-        if((pos!= -1)&&(posP!= -1)){
-            System.out.println(this.persons[pos].toString() + "\n" + this.pays[posP].toString()); 
-        }else{
-            System.out.println("No se encontro alguna persona con ese numero de cedula.");
-        }
+        
+        for(int j=0;j<this.tamP;j++){
+                if(this.persons[j].getIde().equals(ide)){
+                    System.out.println( this.pays[j].toString()); 
+                    System.out.println("<--------------------------------------->");
+                }
+            }
     }
     
     public void viewAllPay(){
 
-        for(int i =0;i<this.persons.length;i++){
-            for(int j=0;j<this.pays.length;j++){
+        for(int i =0;i<this.tam;i++){
+            for(int j=0;j<this.tamP;j++){
                 if(this.persons[i].getIde().equals(this.pays[j].getIde())){
                     System.out.println(this.persons[i].toString() + "\n" + this.pays[j].toString()); 
+                    System.out.println("<--------------------------------------->");
                 }
             }
         }
     }
-
-    
-    
-    
 }

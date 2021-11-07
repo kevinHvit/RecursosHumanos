@@ -24,7 +24,7 @@ public class Principal {
         
         boolean select = false;
         HiringPerson p1 = new HiringPerson() ;
-        PayRoll p2 = new PayRoll();
+        
         
         
         
@@ -44,7 +44,7 @@ public class Principal {
                     p1.menu();
                     break;
                 case "2":
-                    p2.menu();
+                    p1.menuP();
                     break;
                 case "3":
                     System.out.println("Saliendo el programa");

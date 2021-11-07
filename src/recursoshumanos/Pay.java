@@ -109,7 +109,12 @@ public class Pay {
     
      @Override
     public String toString() {
-    return "\nSalario Bruto: "+this.getBrutSalary()+"\nSalario Neto: "+ this.getNetSalary()+"\nHoras Trabajadas: " + this.getHours()+ "\nHoras extras: " + this.getExtraHours() + "\nVale: "+ this.getVale();
+        double ccss=this.getBrutSalary()*0.12;
+        //String val=(this.getVale()>1) ? "\nVale: "+this.getVale() : "\n";
+    return "\nSalario Bruto: "+this.getBrutSalary()+"\nCCSS: "+ccss+
+            "\nSalario Neto: "+ this.getNetSalary()+"\nHoras Trabajadas: " 
+            + this.getHours()+ "\nHoras extras: " + this.getExtraHours() +
+         (   (this.getVale()>1) ? "\nVale: "+this.getVale() : "\n");
    }
 
     

@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
  * @author Kevin Castrillo
  */
 public class HiringPerson {
-    
+    ControllerP p1 = new ControllerP();
     
    
     
@@ -22,7 +22,7 @@ public class HiringPerson {
         boolean exit = false;
         String opcc;
         String ide;
-        ControllerP p1 = new ControllerP();
+       
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         System.out.println(" ");
@@ -67,7 +67,6 @@ public class HiringPerson {
                         break;
                 case "4":
                         p1.viewAllPerson();
-                        menu();
                         
                         break;        
                 case "5":
@@ -96,9 +95,63 @@ public class HiringPerson {
     }
     
     
+    public void menuP() throws IOException{
+        String opcc;
+        String ide;
+        boolean exit = false;
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        while(!exit){
+            
+            System.out.println("1. Pagar a una persona");  
+            System.out.println("2. Ver pago de una persona");  
+            System.out.println("3. Ver Panilla");  
+            System.out.println("4. Salir");
+            System.out.println("<----------------------------------------------->"); 
+            
+            opcc= br.readLine();
+
+            
+
+            switch(opcc){
+                case "1":
+                System.out.println("Digite la identificacion de la persona");
+                ide = br.readLine();
+                p1.pay(ide);
+                
+                break;
+                
+                case "2":
+                    System.out.println("Digite la identificacion de la persona");
+                    ide = br.readLine();
+                    p1.viewPayPerson(ide);
+                    
+                    break;
+
+
+                case "3":
+                    System.out.println(" ");
+                    System.out.println("Mostrando Datos de la planilla ");
+                    System.out.println(" ");
+                    p1.viewAllPay();
+                    
+                    break;
+
+                case "4":
+                    
+                    System.out.println("Saliendo del Programa");
+                    exit = true;
+                    break;
+                default :
+                    System.out.println("Opcion Incorrecta");
+                    break;
+            }
+
+        }
     
     
     
     
-    
+}
 }
