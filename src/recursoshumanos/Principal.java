@@ -26,8 +26,6 @@ public class Principal {
         HiringPerson p1 = new HiringPerson() ;
         
         
-        
-        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         System.out.println("<----------------------------------------------->");  
