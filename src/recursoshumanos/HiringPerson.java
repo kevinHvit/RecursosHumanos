@@ -17,7 +17,7 @@ public class HiringPerson {
     ControllerP p1 = new ControllerP();
     
    
-    
+    //Menu de la clse contratacion
     public void menu()throws IOException{
         boolean exit = false;
         String opcc;
@@ -94,7 +94,7 @@ public class HiringPerson {
         }
     }
     
-    
+    //Menu de la clase pago 
     public void menuP() throws IOException{
         String opcc;
         String ide;

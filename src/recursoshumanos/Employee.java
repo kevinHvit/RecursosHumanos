@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Patron de diseño: Bridge
+ *Se divido el problema de la clase employee en dos clases, una Employee para trabajar las personas y la otra para trabajar los salarios
+ * Se dividio el problema en dos clases estrechamente relacionadas.
  */
 package recursoshumanos;
 
@@ -17,19 +17,22 @@ public class Employee extends Person{
     private String startJob;
     private String workStation;
 
+    
+    //se inicializa el Constructor de la clase 
     public Employee() {
         this.salary = 0;
         this.startJob = "Undefined";
         this.workStation = "Undefined";
         
     }
-    
+    //constructor de la clase
     public Employee(double salary, String startJob, String workStation) {
         this.salary = salary;
         this.startJob = startJob;
         this.workStation = workStation;
     }
 
+    //constructor de la clase mas la herencia de la clase persona
     public Employee(double salary, String startJob, String workStation, int age, String ide, String name, String lastName, String location, String celphone) {
         super(age, ide, name, lastName, location, celphone);
         this.salary = salary;
@@ -79,6 +82,7 @@ public class Employee extends Person{
         this.workStation = workStation;
     }
     
+    //toString heredado de persona mas caracteristicas propias de la clase
     @Override
     public String toString() {
         return super.toString() + "\nPuesto: " + this.workStation;

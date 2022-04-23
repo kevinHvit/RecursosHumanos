@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Patron de diseño: Bridge
+ *Se divido el problema de la clase employee en dos clases, una Employee para trabajar las personas y esta otra para trabajar los salarios
+ * Se dividio el problema en dos clases estrechamente relacionadas
+ * 
  */
 package recursoshumanos;
 
@@ -46,23 +47,33 @@ public class Pay {
 
         this.ide = ide;
     }
-    
+    /**
+     * @return the netSalary
+     */
     public double getNetSalary(){
 
         return netSalary;
     }
+    /**
+     * @param netSalary the netSalary to set
+     */
     public void setNetSalary(double netSalary){
 
 
         this.netSalary = netSalary;
     }
+    /**
+     * @return the brutSalary
+     */
     public double getBrutSalary(){
 
         return brutSalary;
     }
+    /**
+     * @param brutSalary the brutsalary to set
+     */
     public void setBrutSalary(double brutSalary){
-
-
+        
         this.brutSalary = brutSalary;
     }
     /**
@@ -106,7 +117,7 @@ public class Pay {
     public void setVale(double vale) {
         this.vale = vale;
     }
-    
+    //ToString para la seccion de pago
      @Override
     public String toString() {
         double ccss=this.getBrutSalary()*0.12;
@@ -117,9 +128,4 @@ public class Pay {
          (   (this.getVale()>1) ? "\nVale: "+this.getVale() : "\n");
    }
 
-    
-    
-    
-    
-    
 }
